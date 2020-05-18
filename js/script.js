@@ -9,7 +9,7 @@ FSJS project 2 - List Filter and Pagination
 /*** 
    Add your global variables that store the DOM elements you will 
    need to reference and/or manipulate. 
-   
+
    But be mindful of which variables should be global and which 
    should be locally scoped to one of the two main functions you're 
    going to create. A good general rule of thumb is if the variable 
@@ -19,6 +19,15 @@ FSJS project 2 - List Filter and Pagination
 
 
 
+// This project can be completed with just two global variables
+// Create a variable to store the student list item elements in the student list.
+      // Pro Tip: Log out the variable storing the list to ensure it equals the list of li items and not the container of the li elements.
+// Create a variable to store the number of items to show on each “page”, which for this project, is 10.
+
+
+let list = 0;
+let page = 10;
+// need a 
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -37,11 +46,44 @@ FSJS project 2 - List Filter and Pagination
 
 
 
+const showPage = (list, page) => {
+   let startIndex = list; 
+   let endIndex = page;
+   for (let i = 0; i < list.length; i++) {
+     if (list.length[i] >= startIndex && list.length[i] <= endIndex) {
+         document.getElementsByClassName('student-item').style.display = '';
+     }
+   }
+}
+
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
+
+
+const appendPageLinks = (list) => {
+   let pageButtons = list/page;
+   const ul = document.createElement('ul');
+   const div = document.createElement('div');
+   div.className = 'pagination';
+   const pageDiv = document.querySelector('.page');
+   pageDiv.appendChild(div);
+   div.appendChild(ul);
+
+   for (let i = 0; i < page.length; i++) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      ul.appendChild(li);
+      ul.appendChild(a);
+   }
+   
+   a.addEventListener('clicked', (e) => {
+      showPage();
+   });
+}
+
 
 
 
