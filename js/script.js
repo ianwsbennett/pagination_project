@@ -43,9 +43,8 @@ const page = 9;
 
 const showPage = (list, page) => {
   for (let i = 0; i < list.length; i++) {
-    if (list[i] >= list[0] && list[i] <= list[page]){
+    if (i >= 0 && i <= page){
        list[i].style.display = "block";
-       console.log('test');
     } else {
        list[i].style.display = "none";
     }
