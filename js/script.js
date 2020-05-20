@@ -5,7 +5,6 @@ FSJS project 2 - List Filter and Pagination
    
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
-
 /*** 
    Add your global variables that store the DOM elements you will 
    need to reference and/or manipulate. 
@@ -17,17 +16,12 @@ FSJS project 2 - List Filter and Pagination
    scoped to that function.
 ***/
 
-
-
 // This project can be completed with just two global variables
 // Create a variable to store the student list item elements in the student list.
       // Pro Tip: Log out the variable storing the list to ensure it equals the list of li items and not the container of the li elements.
 // Create a variable to store the number of items to show on each “page”, which for this project, is 10.
 
 
-let list = 0;
-let page = 10;
-// need a 
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -44,45 +38,62 @@ let page = 10;
        "invoke" the function 
 ***/
 
-
+let list = document.getElementsByClassName('student-item');
+const page = 9;
 
 const showPage = (list, page) => {
-   let startIndex = list; 
-   let endIndex = page;
-   for (let i = 0; i < list.length; i++) {
-     if (list.length[i] >= startIndex && list.length[i] <= endIndex) {
-         document.getElementsByClassName('student-item').style.display = '';
-     }
-   }
+  for (let i = 0; i < list.length; i++) {
+    if (list[i] >= list[0] && list[i] <= list[page]){
+       list[i].style.display = "block";
+       console.log('test');
+    } else {
+       list[i].style.display = "none";
+    }
+  }
 }
 
+showPage(list, page);
 
-/*** 
-   Create the `appendPageLinks function` to generate, append, and add 
-   functionality to the pagination buttons.
-***/
+// const showPage = (list, page) => {
+//   for (let i = 0; i < list.length; i++) {
+//     if (list[i] >= list[0] && list[i] <= list[page]){
+//       list[i].style.display = "block";
+//     } else {
+//       list[i].style.display = "none";
+//     }
+//   }
+//   return list 
+// }
 
 
-const appendPageLinks = (list) => {
-   let pageButtons = list/page;
-   const ul = document.createElement('ul');
-   const div = document.createElement('div');
-   div.className = 'pagination';
-   const pageDiv = document.querySelector('.page');
-   pageDiv.appendChild(div);
-   div.appendChild(ul);
 
-   for (let i = 0; i < page.length; i++) {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      ul.appendChild(li);
-      ul.appendChild(a);
-   }
+
+// /*** 
+//    Create the `appendPageLinks function` to generate, append, and add 
+//    functionality to the pagination buttons.
+// ***/
+
+
+// const appendPageLinks = (list) => {
+//    let pageButtons = list/page;
+//    const ul = document.createElement('ul');
+//    const div = document.createElement('div');
+//    div.className = 'pagination';
+//    const pageDiv = document.querySelector('.page');
+//    pageDiv.appendChild(div);
+//    div.appendChild(ul);
+
+//    for (let i = 0; i < page.length; i++) {
+//       const li = document.createElement('li');
+//       const a = document.createElement('a');
+//       ul.appendChild(li);
+//       ul.appendChild(a);
+//    }
    
-   a.addEventListener('clicked', (e) => {
-      showPage();
-   });
-}
+//    a.addEventListener('clicked', (e) => {
+//       showPage();
+//    });
+// }
 
 
 
