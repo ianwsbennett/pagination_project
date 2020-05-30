@@ -7,19 +7,18 @@ FSJS project 2 - List Filter and Pagination
 
 
 let list = document.getElementsByClassName('student-item');
-const page = 9;
+let page = 9;
+let min = 0;
 
-const showPage = (list, page) => {
+const showPage = (list, page, min) => {
   for (let i = 0; i < list.length; i++) {
-    if (i >= 0 && i <= page){
+    if (i >= min && i <= page){
        list[i].style.display = "block";
     } else {
        list[i].style.display = "none";
     }
   }
 }
-
-showPage(list, page);
 
 const appendPageLinks = (list) => {
    let totalPages = list.length/page + 1;
@@ -33,30 +32,31 @@ const appendPageLinks = (list) => {
    for (let i = 1; i < totalPages; i++) {
       let li = document.createElement('li');
       let a = document.createElement('a');
-      a.innerHTML = "<a href='#'>";
-      console.log(a);
-      a.textContent = [i];
+      a.setAttribute('href', "#");
+      a.textContent = [i]
       ul.appendChild(li);
       li.appendChild(a);
       ul.firstElementChild.firstElementChild.className = 'active';
    }
+
+   let a = document.querySelectorAll('a');
+
+   for (let i = 0; i < a.length; i++ ) { 
+    a[i].addEventListener('click', (e) => {
+      e.preventDefault();
+      for(let i = 0; i < a.length; i++){
+         a[i].classList.remove('active');
+      }
+      a[i].className = 'active';
+      pageNum = a[i].textContent;
+      max = pageNum * page; 
+      min = (pageNum * page) - page;
+      showPage(list, max, min);
+    });
+  }
 }
 
+showPage(list, page, min);
 appendPageLinks(list);
-
-
-
-/// Working adding a addeventlistener 
-for(let i = 0; i < aloop.length; i++){
-  let aloop = document.getElementsByTagName('a');
-
-  a[i].addEventListener('clicked', (e) => {
-    console.log('shit');
-  });
-}
-
-
-
-
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
