@@ -32,28 +32,39 @@ const appendPageLinks = (list) => {
    for (let i = 1; i < totalPages; i++) {
       let li = document.createElement('li');
       let a = document.createElement('a');
+      // if parent node is Li !!!!
       a.setAttribute('href', "#");
-      a.textContent = [i]
+      a.textContent = [i];
       ul.appendChild(li);
       li.appendChild(a);
       ul.firstElementChild.firstElementChild.className = 'active';
    }
 
+   // Selects 
    let a = document.querySelectorAll('a');
 
+
    for (let i = 0; i < a.length; i++ ) { 
-    a[i].addEventListener('click', (e) => {
-      e.preventDefault();
-      for(let i = 0; i < a.length; i++){
-         a[i].classList.remove('active');
-      }
-      a[i].className = 'active';
-      pageNum = a[i].textContent;
-      max = pageNum * page; 
-      min = (pageNum * page) - page;
-      showPage(list, max, min);
-    });
-  }
+      // if (a.parentNode === Li) {
+
+
+      // }
+      // console.log(a.parentNode);
+      a[i].addEventListener('click', (e) => {
+         e.preventDefault(); // look up 
+         for(let i = 0; i < a.length; i++){
+            a[i].classList.remove('active');
+         };
+         a[i].className = 'active';
+         text = parseInt(a[i].textContent);
+         max = (text * page) + text - 1;
+         min = ((text * page) + text) - 10;
+         // console.log(text);
+         // console.log(max);
+         // console.log(min);
+         showPage(list, max, min);
+      });
+  }   
 }
 
 showPage(list, page, min);
