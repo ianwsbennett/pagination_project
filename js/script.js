@@ -23,7 +23,7 @@ const showPage = (list, page, min) => {
 
 // Function to create pagination links, based on list length 
 const appendPageLinks = (list) => {
-   let totalPages = list.length/page + 1; // makes sure link text starts with 1 
+   let totalPages = Math.ceil(list.length/page); // makes sure link text starts with 1 
    let ul = document.createElement('ul');
    let div = document.createElement('div');
    div.className = 'pagination';
