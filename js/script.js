@@ -7,13 +7,13 @@ FSJS project 2 - List Filter and Pagination
 
 //Global variables 
 let list = document.getElementsByClassName('student-item');
-let page = 9; //  !IMPORTANT index value - needs to be one less than target #
-let min = 0;
+let recordsPerPage = 9; //  !IMPORTANT index value - needs to be one less than target #
+let startIndex = 0;
 
 // Function to show and hide elements, based on list length 
-const showPage = (list, page, min) => {
+const showPage = (list, recordsPerPage, startIndex) => {
   for (let i = 0; i < list.length; i++) {
-    if (i >= min && i <= page){
+    if (i >= startIndex && i <= recordsPerPage){
        list[i].style.display = "block";
     } else {
        list[i].style.display = "none";
@@ -23,7 +23,7 @@ const showPage = (list, page, min) => {
 
 // Function to create pagination links, based on list length 
 const appendPageLinks = (list) => {
-   let totalPages = Math.ceil(list.length/(page-1)); // makes sure link text starts with 1 
+   let totalPages = Math.ceil(list.length/(recordsPerPage - 1)); // makes sure link text starts with 1 
    let ul = document.createElement('ul');
    let div = document.createElement('div');
    div.className = 'pagination';
@@ -51,21 +51,26 @@ const appendPageLinks = (list) => {
             a[i].classList.remove('active');
          };
          a[i].className = 'active';
-         text = parseInt(a[i].textContent);
+         page = parseInt(a[i].textContent);
          // if 1 page is selected it sets default values 
-         if (text === 1){
-            min = 0;
-            max = page;
+         if (page === 1){
+            maxPerPage = recordsPerPage;
+            minPerPage = 0;
          } else {
-            min = ((text * page) - (page) + 1);
-            max = (text * page) + 1;
+            maxPerPage = (page * recordsPerPage) + 1;
+            minPerPage = (page * recordsPerPage) - recordsPerPage + 1;
+            if (page === (totalPages - 1)) {
+               minPerPage = Math.ceil(list.length/ 10) * 10 - 10;
+            }
          };
-         showPage(list, max, min);
+         showPage(list, maxPerPage, minPerPage);
       });
   }
 }
 
 // Initial call of functions on first page load 
-showPage(list, page, min);
+showPage(list, recordsPerPage, startIndex);
 appendPageLinks(list);
+
+
 
